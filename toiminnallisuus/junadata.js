@@ -29,35 +29,63 @@ function junienTulokset(tulos) {
         var elem = document.createElement("li");
         var juna = tulos[i];
 
-        for (var j = 0; j < juna.timeTableRows.length; j++) {
-            if (juna.timeTableRows[j].stationShortCode === document.getElementById("lahtoasema").value && juna.timeTableRows[j].type === "DEPARTURE") {
-                var lahtopaikka = juna.timeTableRows[j].stationShortCode;
-                var lahtoaika = new Date(juna.timeTableRows[j].scheduledTime).toLocaleTimeString("fi", optiot);
+        try {
+            for (var j = 0; j < juna.timeTableRows.length; j++) {
+                if (juna.timeTableRows[j].stationShortCode === document.getElementById("lahtoasema").value && juna.timeTableRows[j].type === "DEPARTURE") {
+                    var lahtopaikka = juna.timeTableRows[j].stationShortCode;
+                    var lahtoaikaKesto = new Date(juna.timeTableRows[j].scheduledTime);
+                    var lahtoaika = new Date(juna.timeTableRows[j].scheduledTime).toLocaleTimeString("fi", optiot);
+                }
+                if (juna.timeTableRows[j].stationShortCode === document.getElementById("paateasema").value && juna.timeTableRows[j].type === "ARRIVAL") {
+                    var paamaara = juna.timeTableRows[j].stationShortCode;
+                    var saapumisaikaKesto = new Date(juna.timeTableRows[j].scheduledTime);
+                    var saapumisaika = new Date(juna.timeTableRows[j].scheduledTime).toLocaleTimeString("fi", optiot);
+                }
+
+                console.dir(matkanKesto(lahtoaikaKesto, saapumisaikaKesto));
             }
-            if (juna.timeTableRows[j].stationShortCode === document.getElementById("paateasema").value && juna.timeTableRows[j].type === "ARRIVAL") {
-                var paamaara = juna.timeTableRows[j].stationShortCode;
-                var saapumisaika = new Date(juna.timeTableRows[j].scheduledTime).toLocaleTimeString("fi", optiot);
+
+            if (juna.trainCategory === document.getElementById("tyyppi").value || document.getElementById("tyyppi").value === "kaikki") {
+                elem.appendChild(document.createTextNode(kaannaJunanTyyppi(juna) + " " + juna.trainType + juna.trainNumber +
+                    " lähtee paikasta " + lahtopaikka + " klo " + lahtoaika + "  ja saapuu paikkaan " + paamaara + " klo " + saapumisaika + ". Matkan kesto " + matkanKesto(lahtoaikaKesto, saapumisaikaKesto) + "."));
+                lista.appendChild(elem);
+            } else {
+                lkmListalle++;
             }
-        }  if (juna.trainCategory === document.getElementById("tyyppi").value || document.getElementById("tyyppi").value === "kaikki") {
-            elem.appendChild(document.createTextNode(kaannaJunanTyyppi(juna) + " " + juna.trainType + juna.trainNumber +
-                " lähtee paikasta " + lahtopaikka + " klo " + lahtoaika + "  ja saapuu paikkaan " + paamaara + " klo " + saapumisaika));
-            lista.appendChild(elem);
-        } else {
-            lkmListalle++;
+        } catch (e) {
+            console.dir(e);
+            onkoJunia();
         }
     }
 
 }
 
-/*function onkoJunia() {
-    if (!document.getElementById("tulos").childNodes.length == 0) {
+function onkoJunia() {
+    if (document.getElementById("tulos").innerHTML === "") {
         document.getElementById("tulos").innerHTML = '<div id="eituloksia">Hakusi ei tuottanut tuloksia!</div>';
     }
-}*/
+}
 
 function kaannaJunanTyyppi(juna) {
     if (juna.trainCategory === "Long-distance") return "Kaukojuna";
     if (juna.trainCategory === "Commuter") return "Lähijuna";
+}
+
+
+//Ei ota huomioon kelon ympäri kääntymistä
+function matkanKesto(lahtoaika, saapumisaika) {
+    var kesto = parseInt((Number(saapumisaika) - Number(lahtoaika)));
+    //var millisekunnit = parseInt((kesto % 1000) / 100);
+    //var sekunnit = parseInt((kesto / 1000) % 60);
+    var minuutit = parseInt((kesto / (1000 * 60)) % 60);
+    var tunnit = parseInt((kesto / (1000 * 60 * 60)) % 24);
+
+    tunnit = (tunnit < 10) ? "0" + tunnit : tunnit;
+    minuutit = (minuutit < 10) ? "0" + minuutit : minuutit;
+    //sekunnit = (sekunnit < 10) ? "0" + sekunnit : sekunnit;
+
+    return tunnit + ":" + minuutit /*+ ":" + sekunnit + ":" + millisekunnit*/;
+
 }
 
 function haedata() {

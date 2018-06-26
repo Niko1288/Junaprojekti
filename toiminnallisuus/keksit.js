@@ -1,8 +1,8 @@
 
-//Funktio luo cookiesit käyttäjälle. Voimassaolo on millisekunteina, joten muutetaan päiviksi.
-function asetaKeksi(keksinNimi, keksinArvo, voimassaolopaivat) {
+//Funktio luo cookiesit käyttäjälle.
+function asetaKeksi(keksinNimi, keksinArvo, voimassaolo) {
     var pvm = new Date();
-    pvm.setTime(pvm.getTime() + (voimassaolopaivat * 24 * 60 * 60 * 1000));
+    pvm.setTime(pvm.getTime() + (voimassaolo * 24 * 60 * 60 * 1000));
     var voimassaoloaika = "päättyy="+pvm.toUTCString();
     document.cookie = keksinNimi + "=" + keksinArvo + ";" + voimassaoloaika + ";path=/";
 }

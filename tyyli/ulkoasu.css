@@ -1,5 +1,14 @@
 * {
     border: 1px dotted blue;
     padding: 10px;
+
+}
+
+body {
+    background-color: seagreen;
+}
+
+#main, header, footer {
+    background-color: lightcoral;
 }
 

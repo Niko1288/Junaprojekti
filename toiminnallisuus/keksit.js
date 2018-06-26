@@ -1,12 +1,15 @@
-function asetaKeksi(cnimi, carvo, voimassaolo) {
-    var d = new Date();
-    d.setTime(d.getTime() + (voimassaolo * 24 * 60 * 60 * 1000));
-    var expires = "expires="+d.toUTCString();
-    document.cookie = cnimi + "=" + carvo + ";" + expires + ";path=/";
+
+//Funktio luo cookiesit käyttäjälle.
+function asetaKeksi(keksinNimi, keksinArvo, voimassaolo) {
+    var pvm = new Date();
+    pvm.setTime(pvm.getTime() + (voimassaolo * 24 * 60 * 60 * 1000));
+    var voimassaoloaika = "päättyy="+pvm.toUTCString();
+    document.cookie = keksinNimi + "=" + keksinArvo + ";" + voimassaoloaika + ";path=/";
 }
 
-function getKeksi(cname) {
-    var name = cname + "=";
+//Alin funktio käyttää tätä tietojen tarkistamiseen.
+function getKeksi(keksinNimi) {
+    var name = keksinNimi + "=";
     var ca = document.cookie.split(';');
     for(var i = 0; i < ca.length; i++) {
         var c = ca[i];
@@ -20,14 +23,15 @@ function getKeksi(cname) {
     return "";
 }
 
+// Funktio käynnistyy kun sivu avataan. Kysyy käyttäjän nimeä, jos keksejä ei vielä ole.
 function tarkistaKeksi() {
-    var user = getKeksi("username");
-    if (user != "") {
-        alert("Welcome again " + user);
+    var kayttaja = getKeksi("username");
+    if (kayttaja != "") {
+        alert("Tervetuloa takaisin, " + kayttaja);
     } else {
-        user = prompt("Please enter your name:", "");
-        if (user != "" && user != null) {
-            asetaKeksi("username", user, 365);
+        kayttaja = prompt("Taidat olla täällä ensimmäistä kertaa. Anna nimesi:", "");
+        if (kayttaja != "" && kayttaja != null) {
+            asetaKeksi("username", kayttaja, 365);
         }
     }
 }

@@ -15,6 +15,7 @@ function getKeksi(nimi) {
 }
 
 // Funktio käynnistyy kun sivu avataan. Kysyy käyttäjän nimeä, jos keksejä ei vielä ole.
+// TODO: Muokkaa alert ja prompt etusivulle kirjautumisikkunaksi.
 function tarkistaKeksi() {
     var kayttaja = getKeksi("username");
     if (kayttaja != null) {

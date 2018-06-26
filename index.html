@@ -4,16 +4,34 @@
     <meta charset="UTF-8">
     <title>Junaprojekti</title>
     <link rel="stylesheet" type="text/css" href="tyyli/ulkoasu.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <header>
     <h1>Junaprojekti</h1>
 </header>
-<div id="container">
+<div id="main">
     <h2>Sisältö tänne</h2>
+    <div id="haku">
+        <p>Lähtöasema:
+            <select id="lahtoasema">
+            </select>
+        </p>
+        <p>Pääteasema:
+            <select id="paateasema">
+            </select>
+        </p>
+        <button onclick="haedata()" id="btn" style="visibility: visible;">Hae junat</button>
+    </div>
+    <h2>Tulos</h2>
+    <div id="tulos">
+
+    </div>
 </div>
 <footer>
     Tekijät: Annina, Saana ja Niko
 </footer>
+<script src="toiminnallisuus/junadata.js"></script>
+<script src="toiminnallisuus/lahtoasemat.js"></script>
 </body>
 </html>

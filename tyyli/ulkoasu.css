@@ -1,5 +1,19 @@
+@keyframes example3 {
+    from {background-color: yellow;}
+    to {background-color: green;}
+}
+
 * {
     border: 1px dotted blue;
     padding: 10px;
+}
+
+#eituloksia {
+    animation-name: example3;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    font-family: Arial;
+    font-weight: bold;
 }
 

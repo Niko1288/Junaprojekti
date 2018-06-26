@@ -11,6 +11,9 @@ pyynto.onreadystatechange = function () {
 //näyttää myös vain saapumisajan määränpäähän(?), ei valitulle pääteasemalle
 //ei kaikkia
 function junienTulokset(tulos) {
+    while (lista.firstChild) {
+        lista.removeChild(lista.firstChild);
+    }
     var optiot = {hour: '2-digit', minute: '2-digit', hour12: false}; //kohtia Tommin koodista
     for (var i = 0; i < 10; ++i) {
         var elem = document.createElement("li");

@@ -1,10 +1,12 @@
 var lista = document.getElementById("lista");
 var pyynto = new XMLHttpRequest();
 pyynto.onreadystatechange = function () {
-    if (pyynto.readyState === 4 && pyynto.status === 200) {
+    if (pyynto.readyState === 4) {
+        if (pyynto.status === 200) {
             var tulos = JSON.parse(pyynto.responseText);
             console.dir(tulos);
             junienTulokset(tulos);
+        }
     }
 };
 //hakee kaikki junat, olisi hyvä, jos saisi valittua haluaako lähi- vai kaukojunan
@@ -15,8 +17,8 @@ function junienTulokset(tulos) {
         lista.removeChild(lista.firstChild);
     }
     var optiot = {hour: '2-digit', minute: '2-digit', hour12: false}; //kohtia Tommin koodista
-    for (var i = 0; i < 10; ++i) {
-        var elem = document.createElement("li");
+    for (var i = 0; i < document.getElementById("lukumaara").value; ++i) {
+        var elem = document.createElement("tr");
         var juna = tulos[i];
         var lahtoaika = new Date(juna.timeTableRows[0].scheduledTime).toLocaleTimeString("fi", optiot);
         var saapumisaika = new Date(juna.timeTableRows[juna.timeTableRows.length - 1].scheduledTime).toLocaleTimeString("fi", optiot);
@@ -34,4 +36,4 @@ function haedata() {
     console.log(alku + keski + lahtoasema + viimeinen + paateasema);
     pyynto.send();
 }
-// haedata();
+

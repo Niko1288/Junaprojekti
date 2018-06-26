@@ -1,6 +1,5 @@
 var lista = document.getElementById("tulos");
 var pyynto = new XMLHttpRequest();
-var lkmListalle = 5;
 pyynto.onreadystatechange = function () {
     if (pyynto.readyState === 4 && pyynto.status === 200) {
         var tulos = JSON.parse(pyynto.responseText);
@@ -25,6 +24,7 @@ function poistaEdellinenLista() {
 function junienTulokset(tulos) {
     poistaEdellinenLista();
     var optiot = {hour: '2-digit', minute: '2-digit', hour12: false};
+    var lkmListalle = document.getElementById("tulostenLkm").value;
     for (var i = 0; i < lkmListalle; i++) {
         var elem = document.createElement("li");
         var juna = tulos[i];

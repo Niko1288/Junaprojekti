@@ -1,15 +1,15 @@
 
-//Funktio luo cookiesit käyttäjälle.
-function asetaKeksi(keksinNimi, keksinArvo, voimassaolo) {
+//Funktio luo cookiesit käyttäjälle. Voimassaolo on millisekunteina, joten muutetaan päiviksi.
+function asetaKeksi(keksinNimi, keksinArvo, voimassaolopaivat) {
     var pvm = new Date();
-    pvm.setTime(pvm.getTime() + (voimassaolo * 24 * 60 * 60));
+    pvm.setTime(pvm.getTime() + (voimassaolopaivat * 24 * 60 * 60 * 1000));
     var voimassaoloaika = "päättyy="+pvm.toUTCString();
     document.cookie = keksinNimi + "=" + keksinArvo + ";" + voimassaoloaika + ";path=/";
 }
 
 //Alin funktio käyttää tätä tietojen tarkistamiseen.
-function getKeksi(name) {
-    var regexp = new RegExp("(?:^" + name + "|;\s*" + name + ")=(.*?)(?:;|$)", "g");
+function getKeksi(nimi) {
+    var regexp = new RegExp("(?:^" + nimi + "|;\s*" + nimi + ")=(.*?)(?:;|$)", "g");
     var result = regexp.exec(document.cookie);
     return (result === null) ? null : result[1];
 }

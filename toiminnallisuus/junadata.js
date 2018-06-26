@@ -44,7 +44,14 @@ function junienTulokset(tulos) {
             " lähtee paikasta " + lahtopaikka + " klo " + lahtoaika + "  ja saapuu paikkaan " + paamaara + " klo " + saapumisaika));
         lista.appendChild(elem);
     }
+
 }
+
+/*function onkoJunia() {
+    if (!document.getElementById("tulos").childNodes.length == 0) {
+        document.getElementById("tulos").innerHTML = '<div id="eituloksia">Hakusi ei tuottanut tuloksia!</div>';
+    }
+}*/
 
 function kaannaJunanTyyppi(juna) {
     if (juna.trainCategory === "Long-distance") return "Kaukojuna";

@@ -69,6 +69,7 @@ function onkoJunia() {
 function kaannaJunanTyyppi(juna) {
     if (juna.trainCategory === "Long-distance") return "Kaukojuna";
     if (juna.trainCategory === "Commuter") return "Lähijuna";
+    if (juna.trainCategory === "Cargo") return "Tavarajuna";
 }
 
 

@@ -24,7 +24,9 @@ function junienTulokset(tulos) {
     tulosOtsikko.appendChild(document.createTextNode("Junat välillä " + document.getElementById("lahtoasema").value + " - " + document.getElementById("paateasema").value));
     divi.appendChild(tulosOtsikko);
     var pvm = document.createElement("p");
-    pvm.appendChild(document.createTextNode("27.6.2018")); //muuta automaattiseksi
+    var pvmOptio = {weekday: 'long', year: 'numeric', month:'long', day:'numeric'};
+    var pvmNyt = new Date().toLocaleDateString("fi", pvmOptio);
+    pvm.appendChild(document.createTextNode(pvmNyt));
     divi.appendChild(pvm);
     lista.appendChild(divi);
 
@@ -51,7 +53,7 @@ function junienTulokset(tulos) {
     for (var i = 0; i < lkmListalle; i++) {
         var juna = tulos[i];
 
-        try {
+        // try {
             for (var j = 0; j < juna.timeTableRows.length; j++) {
                 if (juna.timeTableRows[j].stationShortCode === document.getElementById("lahtoasema").value && juna.timeTableRows[j].type === "DEPARTURE") {
                     var lahtopaikka = juna.timeTableRows[j].stationShortCode;
@@ -111,10 +113,10 @@ function junienTulokset(tulos) {
             } else {
                 lkmListalle++;
             }
-        } catch (e) {
-            console.dir(e);
-            eiJunia();
-        }
+        // } catch (e) {
+        //     console.dir(e);
+        //     eiJunia();
+        // }
     }
 
 }

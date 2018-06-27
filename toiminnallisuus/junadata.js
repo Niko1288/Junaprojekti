@@ -39,6 +39,7 @@ function junienTulokset(tulos) {
                     var paamaara = juna.timeTableRows[j].stationShortCode;
                     var saapumisaikaKesto = new Date(juna.timeTableRows[j].scheduledTime);
                     var saapumisaika = new Date(juna.timeTableRows[j].scheduledTime).toLocaleTimeString("fi", optiot);
+                    break;
                 }
 
                 console.dir(matkanKesto(lahtoaikaKesto, saapumisaikaKesto));
@@ -75,6 +76,8 @@ function kaannaJunanTyyppi(juna) {
     if (juna.trainCategory === "Long-distance") return "Kaukojuna";
     if (juna.trainCategory === "Commuter") return "Lähijuna";
     if (juna.trainCategory === "Cargo") return "Tavarajuna";
+    if (juna.trainCategory === "Locomotive") return "Lokomotiivi";
+    // return "Mysteerijuna";
 }
 
 

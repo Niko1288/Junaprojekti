@@ -25,7 +25,10 @@ function junienTulokset(tulos) {
     divi.appendChild(tulosOtsikko);
     var pvm = document.createElement("p");
     var pvmOptio = {weekday: 'long', year: 'numeric', month:'long', day:'numeric'};
-    var pvmNyt = new Date().toLocaleDateString("fi", pvmOptio);
+    var pvmNyt = new Date().toLocaleDateString("fi", pvmOptio).replace(/na /g, " ");
+    var f = pvmNyt.substring(0, 1);
+    function isokirjain(f){return f.toUpperCase();}
+    pvmNyt = pvmNyt.replace(f, isokirjain(f));
     pvm.appendChild(document.createTextNode(pvmNyt));
     divi.appendChild(pvm);
     lista.appendChild(divi);

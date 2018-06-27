@@ -11,7 +11,6 @@ pyynto.onreadystatechange = function () {
         }
         //document.getElementById("tulos").innerHTML = '<div id="eituloksia">Hakusi ei tuottanut tuloksia!</div>';*/
         junienTulokset(tulos);
-
     }
 };
 
@@ -47,7 +46,6 @@ function junienTulokset(tulos) {
         }
     }
 }
-
 
 function kaannaJunanTyyppi(juna) {
     if (juna.trainCategory === "Long-distance") return "Kaukojuna";

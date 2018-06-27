@@ -17,6 +17,7 @@ function poistaEdellinenLista() {
 function junienTulokset(tulos) {
     poistaEdellinenLista();
     var optiot = {hour: '2-digit', minute: '2-digit', hour12: false};
+    var optiotPaivalla = {weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false};
     var lkmListalle = document.getElementById("tulostenLkm").value;
 
     var divi = document.createElement("div");
@@ -62,11 +63,13 @@ function junienTulokset(tulos) {
                     var lahtopaikka = juna.timeTableRows[j].stationShortCode;
                     var lahtoaikaKesto = new Date(juna.timeTableRows[j].scheduledTime);
                     var lahtoaika = new Date(juna.timeTableRows[j].scheduledTime).toLocaleTimeString("fi", optiot);
+                    var lahtoaikaPaivalla = new Date(juna.timeTableRows[j].scheduledTime).toLocaleTimeString("fi", optiotPaivalla);
                 }
                 if (juna.timeTableRows[j].stationShortCode === document.getElementById("paateasema").value && juna.timeTableRows[j].type === "ARRIVAL") {
                     var paamaara = juna.timeTableRows[j].stationShortCode;
                     var saapumisaikaKesto = new Date(juna.timeTableRows[j].scheduledTime);
                     var saapumisaika = new Date(juna.timeTableRows[j].scheduledTime).toLocaleTimeString("fi", optiot);
+                    var saapumisaikaPaivalla = new Date(juna.timeTableRows[j].scheduledTime).toLocaleTimeString("fi", optiotPaivalla);
                     break;
                 }
 
@@ -79,9 +82,9 @@ function junienTulokset(tulos) {
                     var tieto1 = document.createElement("td");
                     tieto1.appendChild(document.createTextNode(kaannaJunanTyyppi(juna) + " " + juna.commuterLineID));
                     var tieto2 = document.createElement("td");
-                    tieto2.appendChild(document.createTextNode(lahtoaika));
+                    tieto2.appendChild(document.createTextNode(lahtoaikaPaivalla));
                     var tieto3 = document.createElement("td");
-                    tieto3.appendChild(document.createTextNode(saapumisaika));
+                    tieto3.appendChild(document.createTextNode(saapumisaikaPaivalla));
                     var tieto4 = document.createElement("td");
                     tieto4.appendChild(document.createTextNode(matkanKesto(lahtoaikaKesto, saapumisaikaKesto)));
                     tulosRivi.appendChild(tieto1);
@@ -98,9 +101,9 @@ function junienTulokset(tulos) {
                     var tieto5 = document.createElement("td");
                     tieto5.appendChild(document.createTextNode(kaannaJunanTyyppi(juna) + " " + juna.trainType + juna.trainNumber));
                     var tieto6 = document.createElement("td");
-                    tieto6.appendChild(document.createTextNode(lahtoaika));
+                    tieto6.appendChild(document.createTextNode(lahtoaikaPaivalla));
                     var tieto7 = document.createElement("td");
-                    tieto7.appendChild(document.createTextNode(saapumisaika));
+                    tieto7.appendChild(document.createTextNode(saapumisaikaPaivalla));
                     var tieto8 = document.createElement("td");
                     tieto8.appendChild(document.createTextNode(matkanKesto(lahtoaikaKesto, saapumisaikaKesto)));
                     tulosRivi2.appendChild(tieto5);

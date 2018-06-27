@@ -3,13 +3,7 @@ var pyynto = new XMLHttpRequest();
 pyynto.onreadystatechange = function () {
     if (pyynto.readyState === 4 && pyynto.status === 200) {
         var tulos = JSON.parse(pyynto.responseText);
-        console.dir(tulos);
-        /*console.dir(typeof pyynto.responseText);
-        console.dir(pyynto.responseText);
-        if (pyynto.responseText.contains("")) {
-            console.dir("hei");
-        }
-        //document.getElementById("tulos").innerHTML = '<div id="eituloksia">Hakusi ei tuottanut tuloksia!</div>';*/
+        //console.dir(tulos);
         junienTulokset(tulos);
     }
 };
@@ -42,7 +36,7 @@ function junienTulokset(tulos) {
                     break;
                 }
 
-                console.dir(matkanKesto(lahtoaikaKesto, saapumisaikaKesto));
+                //console.dir(matkanKesto(lahtoaikaKesto, saapumisaikaKesto));
             }
 
             if (juna.trainCategory === document.getElementById("tyyppi").value || document.getElementById("tyyppi").value === "kaikki") {
@@ -60,16 +54,14 @@ function junienTulokset(tulos) {
             }
         } catch (e) {
             console.dir(e);
-            onkoJunia();
+            eiJunia();
         }
     }
 
 }
 
-function onkoJunia() {
-    if (document.getElementById("tulos").innerHTML === "") {
-        document.getElementById("tulos").innerHTML = '<div id="eituloksia">Hakusi ei tuottanut tuloksia!</div>';
-    }
+function eiJunia() {
+    document.getElementById("tulos").innerHTML = '<div id="eituloksia">Hakusi ei tuottanut tuloksia!</div>';
 }
 
 function kaannaJunanTyyppi(juna) {

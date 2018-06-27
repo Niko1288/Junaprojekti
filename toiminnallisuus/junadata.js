@@ -39,9 +39,10 @@ function junienTulokset(tulos) {
                     var paamaara = juna.timeTableRows[j].stationShortCode;
                     var saapumisaikaKesto = new Date(juna.timeTableRows[j].scheduledTime);
                     var saapumisaika = new Date(juna.timeTableRows[j].scheduledTime).toLocaleTimeString("fi", optiot);
+                    break;
                 }
 
-                console.dir(matkanKesto(lahtoaikaKesto, saapumisaikaKesto));
+                //console.dir(matkanKesto(lahtoaikaKesto, saapumisaikaKesto));
             }
 
             if (juna.trainCategory === document.getElementById("tyyppi").value || document.getElementById("tyyppi").value === "kaikki") {

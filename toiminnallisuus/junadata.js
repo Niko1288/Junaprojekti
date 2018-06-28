@@ -102,6 +102,7 @@ function junienTulokset(tulos) {
                     var tieto4 = document.createElement("td");
                     tieto4.appendChild(document.createTextNode(matkanKesto(lahtoaikaKesto, saapumisaikaKesto)));
                     var tieto10 = document.createElement("td");
+                    tieto10.setAttribute("style", "display: none");
                     tieto10.appendChild(document.createTextNode(Number(lahtoaikaSorttaukseen.getFullYear().toString() + muotoileAika(lahtoaikaSorttaukseen.getMonth()+1) + muotoileAika(lahtoaikaSorttaukseen.getDate()) + muotoileAika(lahtoaikaSorttaukseen.getHours()) + muotoileAika(lahtoaikaSorttaukseen.getMinutes()))));
                     tulosRivi.appendChild(tieto1);
                     tulosRivi.appendChild(tieto2);
@@ -124,6 +125,7 @@ function junienTulokset(tulos) {
                     var tieto8 = document.createElement("td");
                     tieto8.appendChild(document.createTextNode(matkanKesto(lahtoaikaKesto, saapumisaikaKesto)));
                     var tieto9 = document.createElement("td");
+                    tieto9.setAttribute("style", "display: none");
                     tieto9.appendChild(document.createTextNode(Number(lahtoaikaSorttaukseen.getFullYear().toString() + muotoileAika(lahtoaikaSorttaukseen.getMonth()+1) + muotoileAika(lahtoaikaSorttaukseen.getDate()) + muotoileAika(lahtoaikaSorttaukseen.getHours()) + muotoileAika(lahtoaikaSorttaukseen.getMinutes()))));
                     tulosRivi2.appendChild(tieto5);
                     tulosRivi2.appendChild(tieto6);

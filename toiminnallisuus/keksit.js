@@ -19,11 +19,14 @@ function getKeksi(nimi) {
 function tarkistaKeksi() {
     var kayttaja = getKeksi("username");
     if (kayttaja != null) {
-        alert("Tervetuloa takaisin, " + kayttaja);
+        //TODO tilalle div joka kertoo nimen
+        //alert("Tervetuloa takaisin, " + kayttaja);
+        document.getElementById("tervehdysteksti").innerHTML = "Tervetuloa takaisin " + kayttaja + "!";
     } else {
-        kayttaja = prompt("Taidat olla täällä ensimmäistä kertaa. Anna nimesi:", "");
+        kayttaja = prompt("Käytämme sovelluksessamme evästeitä. Jatkamalla hyväksyt evästeiden käytön.\n\nTaidat olla täällä ensimmäistä kertaa. Anna nimesi:", "");
         if (kayttaja != "" && kayttaja != null) {
             asetaKeksi("username", kayttaja, 30);
+            document.getElementById("tervehdysteksti").innerHTML = "Tervetuloa käyttämään sovellusta " + kayttaja + "!";
         }
     }
 }

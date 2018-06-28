@@ -36,6 +36,7 @@ function junienTulokset(tulos) {
 
     var table = document.createElement("table");
     var tBody = document.createElement("tbody");
+    tBody.setAttribute("id", "tulokset");
     var tHead = document.createElement("thead");
     var otsikkoRivi = document.createElement("tr");
     var otsikko1 = document.createElement("th");
@@ -54,7 +55,17 @@ function junienTulokset(tulos) {
     table.appendChild(tHead);
     table.appendChild(tBody);
 
-    for (var i = 0; i < lkmListalle; i++) {
+    var kaytettavaLuku = "";
+    if (lkmListalle < tulos.length) {
+        kaytettavaLuku = lkmListalle;
+    } else {
+        kaytettavaLuku = tulos.length;
+    }
+    if (kaytettavaLuku === undefined) {
+        eiJunia();
+    }
+
+    for (var i = 0; i < kaytettavaLuku; i++) {
         var juna = tulos[i];
 
         // try {
@@ -112,6 +123,7 @@ function junienTulokset(tulos) {
                     tulosRivi2.appendChild(tieto8);
                     tBody.appendChild(tulosRivi2);
                     lista.appendChild(table);
+
                 //     elem.appendChild(document.createTextNode(kaannaJunanTyyppi(juna) + " " + juna.trainType + juna.trainNumber +
                 //         " lähtee paikasta " + lahtopaikka + " klo " + lahtoaika + "  ja saapuu paikkaan " + paamaara + " klo " + saapumisaika + ". Matkan kesto " + matkanKesto(lahtoaikaKesto, saapumisaikaKesto) + "."));
                 //     lista.appendChild(elem);
@@ -129,6 +141,7 @@ function junienTulokset(tulos) {
 
 function eiJunia() {
     document.getElementById("tulos").innerHTML = '<div id="eituloksia">Hakusi ei tuottanut tuloksia!</div>';
+
 }
 
 function kaannaJunanTyyppi(juna) {

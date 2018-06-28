@@ -15,11 +15,28 @@ function poistaEdellinenLista() {
     }
 }
 
+// function haeLahtoaika(c) {
+//     var nyt = new Date();
+//     for (var i = 0; i < c.timeTableRows.length; ++i) {
+//         if (c.timeTableRows[i].stationShortCode === document.getElementById("lahtoasema").value && c.timeTableRows[i].type === "DEPARTURE") {
+//             if (new Date(c.timeTableRows[i].scheduledTime) > nyt) {
+//                 return c.timeTableRows[i].scheduledTime;
+//             }
+//         }
+//     }
+//     return 0;
+// }
+
 function junienTulokset(tulos) {
     poistaEdellinenLista();
+    // tulos.sort(function (a, b) {
+    //     var lahtoaikaA = new Date(haeLahtoaika(a));
+    //     var lahtoaikaB = new Date(haeLahtoaika(b));
+    //     return lahtoaikaA - lahtoaikaB;
+    // });
     var optiot = {hour: '2-digit', minute: '2-digit', hour12: false};
     var optiotPaivalla = {weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false};
-    var optiotSorttaukseen = {year: 'numeric', month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit'};
+    var optiotSorttaukseen = {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'};
     var lkmListalle = document.getElementById("tulostenLkm").value;
 
     var divi = document.createElement("div");
@@ -27,10 +44,14 @@ function junienTulokset(tulos) {
     tulosOtsikko.appendChild(document.createTextNode("Junat välillä " + document.getElementById("lahtoasema").value + " - " + document.getElementById("paateasema").value));
     divi.appendChild(tulosOtsikko);
     var pvm = document.createElement("p");
-    var pvmOptio = {weekday: 'long', year: 'numeric', month:'long', day:'numeric'};
+    var pvmOptio = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
     var pvmNyt = new Date().toLocaleDateString("fi", pvmOptio).replace(/na /g, " ");
     var f = pvmNyt.substring(0, 1);
-    function isokirjain(f){return f.toUpperCase();}
+
+    function isokirjain(f) {
+        return f.toUpperCase();
+    }
+
     pvmNyt = pvmNyt.replace(f, isokirjain(f));
     pvm.appendChild(document.createTextNode(pvmNyt));
     divi.appendChild(pvm);
@@ -103,7 +124,7 @@ function junienTulokset(tulos) {
                     tieto4.appendChild(document.createTextNode(matkanKesto(lahtoaikaKesto, saapumisaikaKesto)));
                     var tieto10 = document.createElement("td");
                     tieto10.setAttribute("style", "display: none");
-                    tieto10.appendChild(document.createTextNode(Number(lahtoaikaSorttaukseen.getFullYear().toString() + muotoileAika(lahtoaikaSorttaukseen.getMonth()+1) + muotoileAika(lahtoaikaSorttaukseen.getDate()) + muotoileAika(lahtoaikaSorttaukseen.getHours()) + muotoileAika(lahtoaikaSorttaukseen.getMinutes()))));
+                    tieto10.appendChild(document.createTextNode(Number(lahtoaikaSorttaukseen.getFullYear().toString() + muotoileAika(lahtoaikaSorttaukseen.getMonth() + 1) + muotoileAika(lahtoaikaSorttaukseen.getDate()) + muotoileAika(lahtoaikaSorttaukseen.getHours()) + muotoileAika(lahtoaikaSorttaukseen.getMinutes()))));
                     tulosRivi.appendChild(tieto1);
                     tulosRivi.appendChild(tieto2);
                     tulosRivi.appendChild(tieto3);
@@ -126,7 +147,7 @@ function junienTulokset(tulos) {
                     tieto8.appendChild(document.createTextNode(matkanKesto(lahtoaikaKesto, saapumisaikaKesto)));
                     var tieto9 = document.createElement("td");
                     tieto9.setAttribute("style", "display: none");
-                    tieto9.appendChild(document.createTextNode(Number(lahtoaikaSorttaukseen.getFullYear().toString() + muotoileAika(lahtoaikaSorttaukseen.getMonth()+1) + muotoileAika(lahtoaikaSorttaukseen.getDate()) + muotoileAika(lahtoaikaSorttaukseen.getHours()) + muotoileAika(lahtoaikaSorttaukseen.getMinutes()))));
+                    tieto9.appendChild(document.createTextNode(Number(lahtoaikaSorttaukseen.getFullYear().toString() + muotoileAika(lahtoaikaSorttaukseen.getMonth() + 1) + muotoileAika(lahtoaikaSorttaukseen.getDate()) + muotoileAika(lahtoaikaSorttaukseen.getHours()) + muotoileAika(lahtoaikaSorttaukseen.getMinutes()))));
                     tulosRivi2.appendChild(tieto5);
                     tulosRivi2.appendChild(tieto6);
                     tulosRivi2.appendChild(tieto7);
@@ -149,6 +170,7 @@ function junienTulokset(tulos) {
         }
     }
 }
+
 function taulukonSorttaus() {
     var taulukko, rivit, switching, i, x, y, shouldSwitch;
     taulukko = document.getElementById("tulokset");
@@ -156,13 +178,13 @@ function taulukonSorttaus() {
     while (switching) {
         switching = false;
         rivit = taulukko.getElementsByTagName("tr");
-        for (i = 0; i<(rivit.length-1); ++i) {
+        for (i = 0; i < (rivit.length - 1); ++i) {
             shouldSwitch = false;
             x = Number(rivit[i].getElementsByTagName("td")[4].innerHTML);
-            y = Number(rivit[i+1].getElementsByTagName("td")[4].innerHTML);
+            y = Number(rivit[i + 1].getElementsByTagName("td")[4].innerHTML);
             // console.dir(typeof x);
             // console.dir(rivit[i]);
-            console.dir(x-y);
+            console.dir(x - y);
 
             if (x > y) {
                 shouldSwitch = true;
@@ -175,17 +197,18 @@ function taulukonSorttaus() {
             // var rivi2 = rivit[i+1];
             // rivit[i] = rivi2;
             // rivit[i+1]=rivi1;
-            rivit[i].parentNode.insertBefore(rivit[i+1], rivit[i]);
+            rivit[i].parentNode.insertBefore(rivit[i + 1], rivit[i]);
             switching = true;
         }
     }
 
 }
+
 function muotoileAika(aika) {
-    if (aika<10) {
-    return "0"+aika;
+    if (aika < 10) {
+        return "0" + aika;
     } else {
-    return ""+aika;
+        return "" + aika;
     }
 }
 

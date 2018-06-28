@@ -3,7 +3,8 @@ var pyynto = new XMLHttpRequest();
 pyynto.onreadystatechange = function () {
     if (pyynto.readyState === 4 && pyynto.status === 200) {
         var tulos = JSON.parse(pyynto.responseText);
-        //console.dir(tulos);
+
+        console.dir(tulos);
         junienTulokset(tulos);
     }
 };
@@ -18,6 +19,7 @@ function junienTulokset(tulos) {
     poistaEdellinenLista();
     var optiot = {hour: '2-digit', minute: '2-digit', hour12: false};
     var optiotPaivalla = {weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false};
+    var optiotSorttaukseen = {year: 'numeric', month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit'};
     var lkmListalle = document.getElementById("tulostenLkm").value;
 
     var divi = document.createElement("div");
@@ -63,16 +65,17 @@ function junienTulokset(tulos) {
     }
     if (kaytettavaLuku === undefined) {
         eiJunia();
-    }
+    } else {
 
-    for (var i = 0; i < kaytettavaLuku; i++) {
-        var juna = tulos[i];
+        for (var i = 0; i < kaytettavaLuku; i++) {
+            var juna = tulos[i];
 
-        // try {
+            // try {
             for (var j = 0; j < juna.timeTableRows.length; j++) {
                 if (juna.timeTableRows[j].stationShortCode === document.getElementById("lahtoasema").value && juna.timeTableRows[j].type === "DEPARTURE") {
                     var lahtopaikka = juna.timeTableRows[j].stationShortCode;
                     var lahtoaikaKesto = new Date(juna.timeTableRows[j].scheduledTime);
+                    var lahtoaikaSorttaukseen = new Date(juna.timeTableRows[j].scheduledTime);
                     var lahtoaika = new Date(juna.timeTableRows[j].scheduledTime).toLocaleTimeString("fi", optiot);
                     var lahtoaikaPaivalla = new Date(juna.timeTableRows[j].scheduledTime).toLocaleTimeString("fi", optiotPaivalla);
                 }
@@ -98,10 +101,13 @@ function junienTulokset(tulos) {
                     tieto3.appendChild(document.createTextNode(saapumisaikaPaivalla));
                     var tieto4 = document.createElement("td");
                     tieto4.appendChild(document.createTextNode(matkanKesto(lahtoaikaKesto, saapumisaikaKesto)));
+                    var tieto10 = document.createElement("td");
+                    tieto10.appendChild(document.createTextNode(Number(lahtoaikaSorttaukseen.getFullYear().toString() + muotoileAika(lahtoaikaSorttaukseen.getMonth()+1) + muotoileAika(lahtoaikaSorttaukseen.getDate()) + muotoileAika(lahtoaikaSorttaukseen.getHours()) + muotoileAika(lahtoaikaSorttaukseen.getMinutes()))));
                     tulosRivi.appendChild(tieto1);
                     tulosRivi.appendChild(tieto2);
                     tulosRivi.appendChild(tieto3);
                     tulosRivi.appendChild(tieto4);
+                    tulosRivi.appendChild(tieto10);
                     tBody.appendChild(tulosRivi);
                     lista.appendChild(table);
                     // elem.appendChild(document.createTextNode(kaannaJunanTyyppi(juna) + " " + juna.commuterLineID +
@@ -117,26 +123,68 @@ function junienTulokset(tulos) {
                     tieto7.appendChild(document.createTextNode(saapumisaikaPaivalla));
                     var tieto8 = document.createElement("td");
                     tieto8.appendChild(document.createTextNode(matkanKesto(lahtoaikaKesto, saapumisaikaKesto)));
+                    var tieto9 = document.createElement("td");
+                    tieto9.appendChild(document.createTextNode(Number(lahtoaikaSorttaukseen.getFullYear().toString() + muotoileAika(lahtoaikaSorttaukseen.getMonth()+1) + muotoileAika(lahtoaikaSorttaukseen.getDate()) + muotoileAika(lahtoaikaSorttaukseen.getHours()) + muotoileAika(lahtoaikaSorttaukseen.getMinutes()))));
                     tulosRivi2.appendChild(tieto5);
                     tulosRivi2.appendChild(tieto6);
                     tulosRivi2.appendChild(tieto7);
                     tulosRivi2.appendChild(tieto8);
+                    tulosRivi2.appendChild(tieto9);
                     tBody.appendChild(tulosRivi2);
                     lista.appendChild(table);
 
-                //     elem.appendChild(document.createTextNode(kaannaJunanTyyppi(juna) + " " + juna.trainType + juna.trainNumber +
-                //         " lähtee paikasta " + lahtopaikka + " klo " + lahtoaika + "  ja saapuu paikkaan " + paamaara + " klo " + saapumisaika + ". Matkan kesto " + matkanKesto(lahtoaikaKesto, saapumisaikaKesto) + "."));
-                //     lista.appendChild(elem);
+                    //     elem.appendChild(document.createTextNode(kaannaJunanTyyppi(juna) + " " + juna.trainType + juna.trainNumber +
+                    //         " lähtee paikasta " + lahtopaikka + " klo " + lahtoaika + "  ja saapuu paikkaan " + paamaara + " klo " + saapumisaika + ". Matkan kesto " + matkanKesto(lahtoaikaKesto, saapumisaikaKesto) + "."));
+                    //     lista.appendChild(elem);
                 }
             } else {
                 lkmListalle++;
             }
-        // } catch (e) {
-        //     console.dir(e);
-        //     eiJunia();
-        // }
+            // } catch (e) {
+            //     console.dir(e);
+            //     eiJunia();
+            // }
+        }
+    }
+}
+function taulukonSorttaus() {
+    var taulukko, rivit, switching, i, x, y, shouldSwitch;
+    taulukko = document.getElementById("tulokset");
+    switching = true;
+    while (switching) {
+        switching = false;
+        rivit = taulukko.getElementsByTagName("tr");
+        for (i = 0; i<(rivit.length-1); ++i) {
+            shouldSwitch = false;
+            x = Number(rivit[i].getElementsByTagName("td")[4].innerHTML);
+            y = Number(rivit[i+1].getElementsByTagName("td")[4].innerHTML);
+            // console.dir(typeof x);
+            // console.dir(rivit[i]);
+            console.dir(x-y);
+
+            if (x > y) {
+                shouldSwitch = true;
+                break;
+            }
+        }
+        if (shouldSwitch) {
+            console.dir("Hei");
+            // var rivi1 = rivit[i];
+            // var rivi2 = rivit[i+1];
+            // rivit[i] = rivi2;
+            // rivit[i+1]=rivi1;
+            rivit[i].parentNode.insertBefore(rivit[i+1], rivit[i]);
+            switching = true;
+        }
     }
 
+}
+function muotoileAika(aika) {
+    if (aika<10) {
+    return "0"+aika;
+    } else {
+    return ""+aika;
+    }
 }
 
 function eiJunia() {

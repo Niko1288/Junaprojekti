@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <title>Junaprojekti-esitys ryhmä 1</title>
+    <link rel="stylesheet" type="text/css" href="../tyyli/ulkoasu.css">
+    <link rel="stylesheet" type="text/css" href="esitys.css">
+    <link href='https://fonts.googleapis.com/css?family=Monofett' rel='stylesheet'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".piilo").hide();
+            $('h2').click(function () {
+                var $tamah2 = $(this).next('div');
+                $tamah2.toggle("slow", "swing");
+            });
+            // $('h2').css({'background-color': 'green',
+            //     'color': 'white',
+            //     'padding': '10px'});
+            // $('h1').css({'color': 'white',
+            //     'font-weight': 'bolder',
+            //     'background-color': 'rgb(70, 210, 30)',
+            //     'padding': '20px'});
+        });
+    </script>
+</head>
+<body>
+<div id="container">
+    <header>
+        <h1>Junaprojekti-esitys ryhmä 1</h1>
+    </header>
+    <h2>Junat sivulla -tehtävänanto</h2>
+    <div class="piilo">
+        <ul>
+            <li>
+                Tavoitteena oli käyttää Liikenneviraston avointa junadataa
+            </li>
+            <li>Lisäksi tuli mahdollistaa omien asetusten tallettaminen sivulla</li>
+        </ul>
+    </div>
+    <h2>Demo</h2>
+    <div class="piilo">
+        <a target="_blank" id="linkki" href="../index.html">Oikeilla raiteilla</a>
+    </div>
+    <h2>Rakenteen yleiskuva</h2>
+    <div class="piilo">
+        <ul>
+            <li>
+                Ulkoasu: HTML ja CSS
+            </li>
+            <li>
+                Toiminnallisuus: kolme JavaScript-tiedostoa
+                <ul>
+                    <li class="ala">
+                        Keksit
+                    </li>
+                    <li class="ala">
+                        Juna-asemien haku valikkoon
+                    </li>
+                    <li class="ala">
+                        Junadatan haku ja käsittely
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <h2>Keksit</h2>
+    <div class="piilo">
+        <img src="keksi.PNG" alt="Tervetuloa-ponnahdusikkuna">
+        <img src="keksi2.PNG" alt="Tervetuloa käyttämään sovellusta">
+        <img src="evil3.PNG" alt="Tervetuloa takaisin">
+    </div>
+    <h2>Junadatan käsittely</h2>
+    <div class="piilo">
+        <img src="apua.PNG" alt="Apua">
+        <img src="aikamatka.PNG" alt="Aikamatka">
+        <img src="ip-ongelma.PNG" alt="I- ja P-junaongelma">
+    </div>
+    <h2>Lopuksi</h2>
+    <div class="piilo">
+        <p id="animoitu">KYSYMYKSIÄ?</p>
+        <img id="liikkuvaJuna2" src="../junavasemmalle.png" alt="Liikkuva juna"/>
+    </div>
+</div>
+<footer>
+    Tekijät: Annina, Niko ja Saana
+</footer>
+</body>
+</html>

@@ -4,7 +4,7 @@ pyynto.onreadystatechange = function () {
     if (pyynto.readyState === 4 && pyynto.status === 200) {
         var tulos = JSON.parse(pyynto.responseText);
 
-        console.dir(tulos);
+        // console.dir(tulos);
         junienTulokset(tulos);
     }
 };
@@ -185,7 +185,7 @@ function taulukonSorttaus() {
             pitaaVaihtaa = false;
             x = Number(rivit[i].getElementsByTagName("td")[4].innerHTML);
             y = Number(rivit[i + 1].getElementsByTagName("td")[4].innerHTML);
-            console.dir(x-y);
+            // console.dir(x-y);
             if (x > y) {
                 pitaaVaihtaa = true;
                 break;
@@ -201,7 +201,7 @@ function taulukonSorttaus() {
 
 function hakeeTaulukkoa(i) {
     if (i > 0) {
-        console.dir("olen taalla");
+        // console.dir("olen taalla");
         document.getElementById("haetaanDataa").innerHTML = '<div id="junaDiv"><p>Haetaan dataa...</p><img id="liikkuvaJuna" src="junavasemmalle.png" alt="Liikkuva juna"/></div>';
     } else if (i <= 0) {
         document.getElementById("haetaanDataa").innerHTML = "";
@@ -252,6 +252,6 @@ function haedata() {
     var lahtoasema = document.getElementById("lahtoasema").value;
     var paateasema = document.getElementById("paateasema").value;
     pyynto.open('get', "https://rata.digitraffic.fi/api/v1/live-trains/station/" + lahtoasema + "/" + paateasema);
-    console.log("https://rata.digitraffic.fi/api/v1/live-trains/station/" + lahtoasema + "/" + paateasema);
+    // console.log("https://rata.digitraffic.fi/api/v1/live-trains/station/" + lahtoasema + "/" + paateasema);
     pyynto.send();
 }

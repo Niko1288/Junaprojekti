@@ -17,7 +17,7 @@ function tarkistaKeksi() {
 // 2. Ylin funktio käyttää tätä tietojen tarkistamiseen. Palauttaa löytyneen tuloksen tai tyhjän.
 function getKeksi(nimi) {
     var tarkistus = new RegExp("(?:^" + nimi + "|;\s*" + nimi + ")=(.*?)(?:;|$)", "g"); // kaikki osumat. saa olla whitespacea jne.
-    var result = regexp.exec(document.cookie);
+    var result = tarkistus.exec(document.cookie);
     return (result === null) ? null : result[1];
 }
 

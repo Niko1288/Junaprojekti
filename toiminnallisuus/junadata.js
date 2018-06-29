@@ -40,6 +40,7 @@ function junienTulokset(tulos) {
     var lkmListalle = document.getElementById("tulostenLkm").value;
 
     var divi = document.createElement("div");
+    divi.setAttribute("id", "divitys");
     var tulosOtsikko = document.createElement("h2");
     tulosOtsikko.appendChild(document.createTextNode("Junat välillä " + document.getElementById("lahtoasema").value + " - " + document.getElementById("paateasema").value));
     divi.appendChild(tulosOtsikko);
@@ -168,40 +169,43 @@ function junienTulokset(tulos) {
             //     eiJunia();
             // }
         }
+        taulukonSorttaus();
+        hakeeTaulukkoa(-1);
     }
 }
 
 function taulukonSorttaus() {
-    var taulukko, rivit, switching, i, x, y, shouldSwitch;
+    var taulukko, rivit, vaihtaa, i, x, y, pitaaVaihtaa;
     taulukko = document.getElementById("tulokset");
-    switching = true;
-    while (switching) {
-        switching = false;
+    vaihtaa = true;
+    while (vaihtaa) {
+        vaihtaa = false;
         rivit = taulukko.getElementsByTagName("tr");
         for (i = 0; i < (rivit.length - 1); ++i) {
-            shouldSwitch = false;
+            pitaaVaihtaa = false;
             x = Number(rivit[i].getElementsByTagName("td")[4].innerHTML);
             y = Number(rivit[i + 1].getElementsByTagName("td")[4].innerHTML);
-            // console.dir(typeof x);
-            // console.dir(rivit[i]);
-            console.dir(x - y);
-
+            console.dir(x-y);
             if (x > y) {
-                shouldSwitch = true;
+                pitaaVaihtaa = true;
                 break;
             }
         }
-        if (shouldSwitch) {
-            console.dir("Hei");
-            // var rivi1 = rivit[i];
-            // var rivi2 = rivit[i+1];
-            // rivit[i] = rivi2;
-            // rivit[i+1]=rivi1;
+        if (pitaaVaihtaa) {
             rivit[i].parentNode.insertBefore(rivit[i + 1], rivit[i]);
-            switching = true;
+            vaihtaa = true;
         }
     }
 
+}
+
+function hakeeTaulukkoa(i) {
+    if (i > 0) {
+        console.dir("olen taalla");
+        document.getElementById("haetaanDataa").innerHTML = '<div id="junaDiv"><p>Haetaan dataa...</p><img id="liikkuvaJuna" src="junavasemmalle.png" alt="Liikkuva juna"/></div>';
+    } else if (i <= 0) {
+        document.getElementById("haetaanDataa").innerHTML = "";
+    }
 }
 
 function muotoileAika(aika) {
@@ -214,6 +218,7 @@ function muotoileAika(aika) {
 
 function eiJunia() {
     document.getElementById("tulos").innerHTML = '<div id="eituloksia">Hakusi ei tuottanut tuloksia!</div>';
+    hakeeTaulukkoa(-1);
 
 }
 
@@ -243,6 +248,7 @@ function matkanKesto(lahtoaika, saapumisaika) {
 }
 
 function haedata() {
+    hakeeTaulukkoa(1);
     var lahtoasema = document.getElementById("lahtoasema").value;
     var paateasema = document.getElementById("paateasema").value;
     pyynto.open('get', "https://rata.digitraffic.fi/api/v1/live-trains/station/" + lahtoasema + "/" + paateasema);

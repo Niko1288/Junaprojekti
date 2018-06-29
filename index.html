@@ -9,53 +9,54 @@
     <link href='https://fonts.googleapis.com/css?family=Nothing You Could Do' rel='stylesheet'>
 </head>
 <body onload="tarkistaKeksi()">
-<div id="container">
-    <header>
-        <div id="junaDiv"><img id="liikkuvaJuna" src="junavasemmalle.png" alt="Liikkuva juna"/></div>
-        <h1>Oikeilla raiteilla</h1>
-        <p id="tervehdysteksti"></p>
-    </header>
-    <div id="main">
-        <h2 class="haku">Haku</h2>
-        <div id="haku" class="haku">
-            <div class="vasenDiv">Mistä:<br/>
-                <select id="lahtoasema" autofocus>
-                    <option selected disabled hidden>Valitse tästä</option>
-                </select>
+<div id="tausta">
+    <div id="container">
+        <header>
+            <h1>Oikeilla raiteilla</h1>
+            <p id="tervehdysteksti"></p>
+        </header>
+        <div id="main">
+            <h2 class="haku">Haku</h2>
+            <div id="haku" class="haku">
+                <div class="vasenDiv">Mistä:<br/>
+                    <select id="lahtoasema" autofocus>
+                        <option selected disabled hidden>Valitse tästä</option>
+                    </select>
+                </div>
+                <div class="oikeaDiv">Mihin:<br/>
+                    <select id="paateasema">
+                        <option selected disabled hidden>Valitse tästä</option>
+                    </select>
+                </div>
+                <div class="valikko">Junan tyyppi:<br/>
+                    <select id="tyyppi">
+                        <option value="kaikki"> Ei väliä</option>
+                        <option value="Commuter"> Vain lähijunat</option>
+                        <option value="Long-distance"> Vain kaukojunat</option>
+                        <option value="Cargo"> Vain tavarajunat</option>
+                        <option value="Locomotive"> Vain lokomotiivit</option>
+                    </select>
+                </div>
+                <div class="valikko">Tuloksia näytetään:<br/>
+                    <select id="tulostenLkm">
+                        <option value="1">1</option>
+                        <option value="5" selected>5</option>
+                        <option value="10">10</option>
+                        <option value="1000">Kaikki</option>
+                    </select>
+                    <br/>
+                </div>
+                <button onclick="haedata()" id="btn" style="visibility: visible;">Hae junat</button>
             </div>
-            <div class="oikeaDiv">Mihin:<br/>
-                <select id="paateasema">
-                    <option selected disabled hidden>Valitse tästä</option>
-                </select>
-            </div>
-            <div class="valikko">Junan tyyppi:<br/>
-                <select id="tyyppi">
-                    <option value="kaikki"> Ei väliä</option>
-                    <option value="Commuter"> Vain lähijunat</option>
-                    <option value="Long-distance"> Vain kaukojunat</option>
-                    <option value="Cargo"> Vain tavarajunat</option>
-                    <option value="Locomotive"> Vain lokomotiivit</option>
-                </select>
-            </div>
-            <div class="valikko">Tuloksia näytetään:<br/>
-                <select id="tulostenLkm">
-                    <option value="1">1</option>
-                    <option value="5" selected>5</option>
-                    <option value="10">10</option>
-                    <option value="1000">Kaikki</option>
-                </select>
-                <br/>
-            </div>
-            <button onclick="haedata()" id="btn" style="visibility: visible;">Hae junat</button>
+            <div id="haetaanDataa"></div>
+            <div id="tulos"></div>
         </div>
-        <div id="tulos">
-        </div>
+        <footer>
+            <p>Tekijät: Annina, Niko ja Saana</p>
+            <p>Liikennetietojen lähde Liikennevirasto / <a href="https://rata.digitraffic.fi">rata.digitraffic.fi</a>,
+                lisenssi CC 4.0 BY</p>
+        </footer>
     </div>
-    <footer>
-        <p>Tekijät: Annina, Saana ja Niko</p>
-        <p>Liikennetietojen lähde Liikennevirasto / <a href="https://rata.digitraffic.fi">rata.digitraffic.fi</a>,
-            lisenssi CC 4.0 BY</p>
-    </footer>
 </div>
 <script src="toiminnallisuus/junadata.js"></script>
 <script src="toiminnallisuus/lahtoasemat.js"></script>

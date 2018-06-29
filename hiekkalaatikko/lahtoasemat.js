@@ -7,7 +7,7 @@ asemahaku.onreadystatechange = function () {
         lajitteleAsemat(tulokset);
     }
 };
-//ainakin kuopioon klo 16.?? menevä IC puuttuu, koska juna katkeaa kouvolassa ja numero muuttuu
+
 function lajitteleAsemat(tulokset) {
     for (var i = 0; i < tulokset.length; ++i) {
         var asema = tulokset[i];

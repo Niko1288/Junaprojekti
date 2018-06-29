@@ -1,0 +1,72 @@
+@keyframes example6 {
+    from {margin-left: 0%;}
+    to {margin-left: 70%;}
+}
+
+* {
+    padding: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 0;
+    font-size: 110%;
+}
+
+#linkki {
+    font-family: Monofett, Arial;
+    font-size: 70px;
+    color: #2c852b;
+    margin-bottom: 0;
+}
+
+#linkki:hover, #linkki:active {
+    color: lightcoral;
+}
+
+li {
+    margin: 0;
+}
+
+.ala {
+    font-size: 80%;
+    margin: 0;
+    padding: 5px;
+}
+
+img {
+    width: 100%;
+    margin: 10px;
+}
+
+@keyframes example5 {
+    from {color: lightcoral;}
+    to {color: #2c852b;}
+}
+
+#animoitu {
+    animation-name: example5;
+    animation-duration: 1s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    font-weight: bold;
+    text-align: center;
+    font-size: 200%;
+}
+
+#liikkuvaJuna2 {
+    animation-name: example6;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    width: 30%;
+}
+
+footer, header {
+    text-align: center;
+    color: lightcoral;
+    font-family: Monofett, Arial;
+}
+
+h2 {
+    text-align: center;
+}

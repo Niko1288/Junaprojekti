@@ -17,16 +17,17 @@ function tarkistaKeksi() {
 // 2. Ylin funktio käyttää tätä tietojen tarkistamiseen. Palauttaa löytyneen tuloksen tai tyhjän.
 function getKeksi(nimi) {
     var tarkistus = new RegExp("(?:^" + nimi + "|;\s*" + nimi + ")=(.*?)(?:;|$)", "g"); // kaikki osumat. saa olla whitespacea jne.
-    var result = tarkistus.exec(document.cookie);
-    return (result === null) ? null : result[1];
+    var tulos = tarkistus.exec(document.cookie);
+    return (tulos === null) ? null : tulos[1];
 }
 
 // 3. Funktio luo cookiesit käyttäjälle. Tällä hetkellä vain username.
 function asetaKeksi(keksinNimi, keksinArvo, voimassaolo) {
     var pvm = new Date();
     pvm.setTime(pvm.getTime() + (voimassaolo * 24 * 60 * 60 * 1000));  // Millisekunnit päiviksi
-    var voimassaoloaika = "päättyy="+pvm.toUTCString();
-    document.cookie = keksinNimi + "=" + keksinArvo + ";" + voimassaoloaika + ";path=/";
+    var voimassaoloaika = "päättyy=" + pvm.toUTCString();
+    var x = document.cookie = keksinNimi + "=" + keksinArvo + ";" + voimassaoloaika + ";path=/";
+    console.dir(x);
 }
 
 

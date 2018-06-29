@@ -3,8 +3,6 @@ var pyynto = new XMLHttpRequest();
 pyynto.onreadystatechange = function () {
     if (pyynto.readyState === 4 && pyynto.status === 200) {
         var tulos = JSON.parse(pyynto.responseText);
-
-        // console.dir(tulos);
         junienTulokset(tulos);
     }
 };

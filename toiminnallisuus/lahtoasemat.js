@@ -3,7 +3,7 @@ var asemahaku = new XMLHttpRequest();
 asemahaku.onreadystatechange = function () {
     if (asemahaku.readyState === 4 && asemahaku.status === 200) {
         var tulokset = JSON.parse(asemahaku.responseText);
-        console.dir(tulokset);
+        // console.dir(tulokset);
         lajitteleAsemat(tulokset);
     }
 };
@@ -26,7 +26,7 @@ function lajitteleAsemat(tulokset) {
 
 function haeAsemat() {
     asemahaku.open('get', "https://rata.digitraffic.fi/api/v1/metadata/stations");
-    console.log("https://rata.digitraffic.fi/api/v1/metadata/stations");
+    // console.log("https://rata.digitraffic.fi/api/v1/metadata/stations");
     asemahaku.send();
 }
 haeAsemat();
